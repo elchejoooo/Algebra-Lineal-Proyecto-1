@@ -72,3 +72,28 @@ class Formularios:
                 ventana.destroy()
             except: messagebox.showerror("Error", "Datos invalidos")
         ttk.Button(ventana, text="Guardar y Continuar", command=enviar).pack(pady=25)
+
+    @staticmethod
+    def entrada_pendiente(parent, callback_graficar):
+
+        ventana = tk.Toplevel(parent)
+        ventana.title("Ingreso: Forma Punto Pendiente")
+        ventana.geometry("350x400")
+
+        tk.Label(ventana, text="Ingrese la pendiente y el intercepto", font=('Arial', 11, 'bold')).pack(pady=15)
+
+        tk.Label(ventana, text="Pendiente (m):").pack()
+        em = ttk.Entry(ventana, justify='center')
+        em.pack()
+
+        tk.Label(ventana, text="Intercepto vertical (b):").pack(pady=(10,0))
+        eb = ttk.Entry(ventana, justify='center')
+        eb.pack()
+
+        def enviar():
+            try:
+                callback_graficar("pendiente", m=float(em.get()), b=float(eb.get()))
+                ventana.destroy()
+            except:messagebox.showerror("Error", "Datos invalidos")
+
+        ttk.Button(ventana, text="Guardar y Continuar", command=enviar).pack(pady=25)
