@@ -1,3 +1,4 @@
+from tkinter import SE
 import numpy as np
 
 class MotorRecta:
@@ -39,3 +40,12 @@ class MotorRecta:
         a, b = self.v_normal
         c = a * self.punto_p[0] + b * self.punto_p[1]
         self.forma_general = f"{a:.2f}x + {b:.2f}y = {c:.2f}"
+
+    def calcular_desde_pendiente(self, m, b):
+        #punto donde corta al eje y 
+        self.punto_p = (0, b)
+        self.v_director = (1, m)
+        self.v_normal = (-m, 1)
+
+        self.generar_ecuacion_general()
+        return self.forma_general
