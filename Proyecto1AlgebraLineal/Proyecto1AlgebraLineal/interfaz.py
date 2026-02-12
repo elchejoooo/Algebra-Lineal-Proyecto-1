@@ -9,7 +9,6 @@ class Formularios:
         ventana.geometry("350x500")
         tk.Label(ventana, text="Ingrese dos puntos y sus tiempos", font=('Arial', 11, 'bold')).pack(pady=15)
         
-        # Campos P1, T1, P2, T2...
         tk.Label(ventana, text="Punto 1 (x, y):").pack()
         ex1 = ttk.Entry(ventana, justify='center'); ex1.pack()
         ey1 = ttk.Entry(ventana, justify='center'); ey1.pack()
@@ -47,8 +46,29 @@ class Formularios:
 
         def enviar():
             try:
-                callback_graficar("vectorial", p=(float(epx.get()), float(epy.get())), 
-                                  d=(float(edx.get()), float(edy.get())))
+                callback_graficar("vectorial", p=(float(epx.get()), float(epy.get())), d=(float(edx.get()), float(edy.get())))
+                ventana.destroy()
+            except: messagebox.showerror("Error", "Datos invalidos")
+        ttk.Button(ventana, text="Guardar y Continuar", command=enviar).pack(pady=25)
+
+    @staticmethod
+    def entrada_normal(parent, callback_graficar):
+        ventana = tk.Toplevel(parent)
+        ventana.title("Ingreso: Forma Normal")
+        ventana.geometry("350x450")
+        tk.Label(ventana, text="Ingrese el punto P y el vector normal", font=('Arial', 11, 'bold')).pack(pady=15)
+
+        tk.Label(ventana, text="Punto P (px, py):").pack()
+        epx = ttk.Entry(ventana, justify='center'); epx.pack()
+        epy = ttk.Entry(ventana, justify='center'); epy.pack()
+
+        tk.Label(ventana, text="Vector Normal (nx, ny):").pack(pady=(15,0))
+        enx = ttk.Entry(ventana, justify='center'); enx.pack()
+        eny = ttk.Entry(ventana, justify='center'); eny.pack()
+
+        def enviar():
+            try:
+                callback_graficar("normal", p=(float(epx.get()), float(epy.get())), n=(float(enx.get()), float(eny.get())))
                 ventana.destroy()
             except: messagebox.showerror("Error", "Datos invalidos")
         ttk.Button(ventana, text="Guardar y Continuar", command=enviar).pack(pady=25)
