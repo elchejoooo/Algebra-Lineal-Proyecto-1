@@ -7,37 +7,48 @@ class Formularios:
         ventana = tk.Toplevel(parent)
         ventana.title("Ingreso: Ecuaciones Parametricas")
         ventana.geometry("350x500")
-
-        # Encabezado segun tu imagen
         tk.Label(ventana, text="Ingrese dos puntos y sus tiempos", font=('Arial', 11, 'bold')).pack(pady=15)
-
-        # Punto 1
+        
+        # Campos P1, T1, P2, T2...
         tk.Label(ventana, text="Punto 1 (x, y):").pack()
-        ex1 = ttk.Entry(ventana, justify='center'); ex1.pack(pady=2)
-        ey1 = ttk.Entry(ventana, justify='center'); ey1.pack(pady=2)
+        ex1 = ttk.Entry(ventana, justify='center'); ex1.pack()
+        ey1 = ttk.Entry(ventana, justify='center'); ey1.pack()
+        tk.Label(ventana, text="Tiempo 1 (t1):").pack()
+        et1 = ttk.Entry(ventana, justify='center'); et1.pack()
         
-        # Tiempo 1
-        tk.Label(ventana, text="Tiempo 1 (t1):").pack(pady=(5,0))
-        et1 = ttk.Entry(ventana, justify='center'); et1.pack(pady=2)
-
-        # Punto 2
         tk.Label(ventana, text="Punto 2 (x, y):").pack(pady=(10,0))
-        ex2 = ttk.Entry(ventana, justify='center'); ex2.pack(pady=2)
-        ey2 = ttk.Entry(ventana, justify='center'); ey2.pack(pady=2)
-        
-        # Tiempo 2
-        tk.Label(ventana, text="Tiempo 2 (t2):").pack(pady=(5,0))
-        et2 = ttk.Entry(ventana, justify='center'); et2.pack(pady=2)
+        ex2 = ttk.Entry(ventana, justify='center'); ex2.pack()
+        ey2 = ttk.Entry(ventana, justify='center'); ey2.pack()
+        tk.Label(ventana, text="Tiempo 2 (t2):").pack()
+        et2 = ttk.Entry(ventana, justify='center'); et2.pack()
 
         def enviar():
             try:
-                p1 = (float(ex1.get()), float(ey1.get()))
-                p2 = (float(ex2.get()), float(ey2.get()))
-                t1, t2 = float(et1.get()), float(et2.get())
-                callback_graficar("parametricas", p1=p1, p2=p2, t1=t1, t2=t2)
+                callback_graficar("parametricas", p1=(float(ex1.get()), float(ey1.get())), 
+                                  p2=(float(ex2.get()), float(ey2.get())), t1=float(et1.get()), t2=float(et2.get()))
                 ventana.destroy()
-            except ValueError:
-                messagebox.showerror("Error", "Por favor ingrese solo numeros validos")
+            except: messagebox.showerror("Error", "Datos invalidos")
+        ttk.Button(ventana, text="Guardar y Continuar", command=enviar).pack(pady=20)
 
-        # Boton segun tu imagen
+    @staticmethod
+    def entrada_vectorial(parent, callback_graficar):
+        ventana = tk.Toplevel(parent)
+        ventana.title("Ingreso: Forma Vectorial")
+        ventana.geometry("350x450")
+        tk.Label(ventana, text="Ingrese el punto P y el vector director", font=('Arial', 11, 'bold')).pack(pady=15)
+
+        tk.Label(ventana, text="Punto P (px, py):").pack()
+        epx = ttk.Entry(ventana, justify='center'); epx.pack()
+        epy = ttk.Entry(ventana, justify='center'); epy.pack()
+
+        tk.Label(ventana, text="Vector Director (dx, dy):").pack(pady=(15,0))
+        edx = ttk.Entry(ventana, justify='center'); edx.pack()
+        edy = ttk.Entry(ventana, justify='center'); edy.pack()
+
+        def enviar():
+            try:
+                callback_graficar("vectorial", p=(float(epx.get()), float(epy.get())), 
+                                  d=(float(edx.get()), float(edy.get())))
+                ventana.destroy()
+            except: messagebox.showerror("Error", "Datos invalidos")
         ttk.Button(ventana, text="Guardar y Continuar", command=enviar).pack(pady=25)

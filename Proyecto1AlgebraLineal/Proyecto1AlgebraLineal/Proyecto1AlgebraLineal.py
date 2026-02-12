@@ -31,9 +31,12 @@ class AppPrincipal:
             if tipo == "parametricas":
                 btn = ttk.Button(self.root, text=texto, width=35, 
                                  command=lambda: Formularios.entrada_parametricas(self.root, self.ejecutar_logica))
+            elif tipo == "vectorial":
+                btn = ttk.Button(self.root, text=texto, width=35, 
+                                 command=lambda: Formularios.entrada_vectorial(self.root, self.ejecutar_logica))
             else:
                 btn = ttk.Button(self.root, text=texto, width=35, 
-                                 command=lambda t=texto: print(f"Opcion {t} en desarrollo"))
+                                 command=lambda t=texto: print(f"Opcion {t} pendiente"))
             btn.pack(pady=10)
 
         # Pie de pagina segun tu imagen
@@ -42,6 +45,8 @@ class AppPrincipal:
     def ejecutar_logica(self, tipo, **kwargs):
         if tipo == "parametricas":
             self.motor.calcular_desde_parametricas(kwargs['p1'], kwargs['p2'], kwargs['t1'], kwargs['t2'])
+        elif tipo == "vectorial":
+            self.motor.calcular_desde_vectorial(kwargs['p'], kwargs['d'])
         self.mostrar_grafica()
 
     def mostrar_grafica(self):
