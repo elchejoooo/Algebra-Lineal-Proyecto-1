@@ -1,5 +1,5 @@
 ﻿import tkinter as tk
-from tkinter import ttk, messagebox
+from tkinter import SEL, ttk, messagebox
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -30,6 +30,8 @@ class AppPrincipal:
                 cmd = lambda: Formularios.entrada_vectorial(self.root, self.ejecutar_logica)
             elif tipo == "normal":
                 cmd = lambda: Formularios.entrada_normal(self.root, self.ejecutar_logica)
+            elif tipo == "pendiente":
+                cmd = lambda: Formularios.entrada_pendiente(self.root, self.ejecutar_logica)
             else:
                 cmd = lambda t=texto: print(f"Opcion {t} pendiente")
             
@@ -43,9 +45,12 @@ class AppPrincipal:
         elif tipo == "vectorial":
             self.motor.calcular_desde_vectorial(kwargs['p'], kwargs['d'])
         elif tipo == "normal":
-            self.motor.calcular_desde_normal(kwargs['p'], kwargs['n'])
+            self.motor.calcular_desde_normal(kwargs['p'], kwargs['n']) 
+        elif tipo == "pendiente":
+            self.motor.calcular_desde_pendiente(kwargs['m'], kwargs['b'])
+        #llamando a la funcion para mostrar la grafica
         self.mostrar_grafica()
-
+           
     def mostrar_grafica(self):
         p, d, n = self.motor.punto_p, self.motor.v_director, self.motor.v_normal
         plt.figure("Resultado Grafico - UMES")
