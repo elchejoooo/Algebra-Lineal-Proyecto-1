@@ -1,8 +1,7 @@
 ﻿import tkinter as tk
-from tkinter import SEL, ttk, messagebox
+from tkinter import ttk, messagebox
 import matplotlib.pyplot as plt
 import numpy as np
-
 from logica import MotorRecta
 from interfaz import Formularios
 
@@ -52,9 +51,9 @@ class AppPrincipal:
             self.motor.generar_desde_general(kwargs['a'], kwargs['b'], kwargs['c'])
         elif tipo == "pendiente":
             self.motor.calcular_desde_pendiente(kwargs['m'], kwargs['b'])
-        #llamando a la funcion para mostrar la grafica
+        
         self.mostrar_grafica()
-           
+
     def mostrar_grafica(self):
         p, d, n = self.motor.punto_p, self.motor.v_director, self.motor.v_normal
         plt.figure("Resultado Grafico - UMES")
