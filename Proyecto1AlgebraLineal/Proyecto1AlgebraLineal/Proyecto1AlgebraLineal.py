@@ -30,6 +30,8 @@ class AppPrincipal:
                 cmd = lambda: Formularios.entrada_vectorial(self.root, self.ejecutar_logica)
             elif tipo == "normal":
                 cmd = lambda: Formularios.entrada_normal(self.root, self.ejecutar_logica)
+            elif tipo == "general":
+                cmd = lambda: Formularios.entrada_general(self.root, self.ejecutar_logica)
             elif tipo == "pendiente":
                 cmd = lambda: Formularios.entrada_pendiente(self.root, self.ejecutar_logica)
             else:
@@ -45,7 +47,9 @@ class AppPrincipal:
         elif tipo == "vectorial":
             self.motor.calcular_desde_vectorial(kwargs['p'], kwargs['d'])
         elif tipo == "normal":
-            self.motor.calcular_desde_normal(kwargs['p'], kwargs['n']) 
+            self.motor.calcular_desde_normal(kwargs['p'], kwargs['n'])
+        elif tipo == "general":
+            self.motor.generar_desde_general(kwargs['a'], kwargs['b'], kwargs['c'])
         elif tipo == "pendiente":
             self.motor.calcular_desde_pendiente(kwargs['m'], kwargs['b'])
         #llamando a la funcion para mostrar la grafica

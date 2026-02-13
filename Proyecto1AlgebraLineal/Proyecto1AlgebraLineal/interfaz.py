@@ -74,6 +74,36 @@ class Formularios:
         ttk.Button(ventana, text="Guardar y Continuar", command=enviar).pack(pady=25)
 
     @staticmethod
+    def entrada_general(parent, callback_graficar):
+
+        ventana = tk.Toplevel(parent)
+        ventana.title("Ingreso: Forma Algebraica General")
+        ventana.geometry("350x400")
+
+        tk.Label(ventana, text="Ingrese coeficientes a, b y c", font=('Arial', 11, 'bold')).pack(pady=15)
+
+        tk.Label(ventana, text="Coeficiente a:").pack()
+        ea = ttk.Entry(ventana, justify='center')
+        ea.pack()
+
+        tk.Label(ventana, text="Coeficiente b:").pack(pady=(10,0))
+        eb = ttk.Entry(ventana, justify='center')
+        eb.pack()
+
+        tk.Label(ventana, text="Coeficiente c:").pack(pady=(10,0))
+        ec = ttk.Entry(ventana, justify='center')
+        ec.pack()
+
+        def enviar():
+            try:
+                callback_graficar("general", a=float(ea.get()), b=float(eb.get()), c=float(ec.get()))
+                ventana.destroy()
+            except: messagebox.showerror("Error", "Datos invalidos")
+
+        ttk.Button(ventana, text="Guardar y Continuar", command=enviar).pack(pady=25)
+
+
+    @staticmethod
     def entrada_pendiente(parent, callback_graficar):
 
         ventana = tk.Toplevel(parent)
